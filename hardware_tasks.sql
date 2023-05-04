@@ -36,8 +36,8 @@ ORDER BY price DESC
 LIMIT 1; 
 
 -- 8. Добавить в таблицу товар Ноутбук Lenovo 2BXKQ7E9XD как новинку по цене 54500 руб. в единственном экземпляре
--- INSERT INTO hardware (title, price, amount, tag)
--- VALUES ('Ноутбук Lenovo 2BXKQ7E9XD', 54500, 1, 'new');
+INSERT INTO hardware (title, price, amount, tag)
+VALUES ('Ноутбук Lenovo 2BXKQ7E9XD', 54500, 1, 'new');
 
 -- 9. Найти и удалить по названию из базы ошибочно добавленный товар Очки PS VR 2
 DELETE FROM hardware
