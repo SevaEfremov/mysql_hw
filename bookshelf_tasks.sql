@@ -1,10 +1,10 @@
 -- 1. Найти автора с самым большим числом книг и вывести его имя
 
-SELECT authors.name
+SELECT authors.name 
 FROM authors
 JOIN authors_books ON authors_id = authors.id
-JOIN books ON books.id = books_id
-ORDER BY authors_books.books_id DESC
+GROUP BY authors.name
+ORDER BY COUNT(authors_books.authors_id) DESC
 LIMIT 1 
 ;
 
@@ -69,12 +69,14 @@ UPDATE books
 JOIN authors_books ON books_id = books.id
 JOIN authors ON authors_id = authors.id
 SET books.friends_id = (SELECT friends.id FROM friends WHERE friends.name = 'Иванов Иван')
-WHERE books.title = 'Божественная комедия' AND books.id = 9
+WHERE books.title = 'Божественная комедия' AND authors.name = 'Данте Алигьери' AND books.id > 0
 ;
 
 -- 9. Добавить в базу книгу «Краткие ответы на большие вопросы», год издания 2020, автор «Стивен Хокинг», положить ее на полку в кабинете
 
- INSERT INTO books (title, year, shelves_id)
-     VALUES('Краткие ответы на большинство вопросов', '2020', 1);
  INSERT INTO authors (name)
-     VALUES('Стивен Хокинг');
+     VALUES('Стивен Хокинг')
+     ;
+ INSERT INTO books (title, year, shelves_id)
+     VALUES('Краткие ответы на большинство вопросов', '2020', 1)
+;
