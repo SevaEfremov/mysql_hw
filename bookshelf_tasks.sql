@@ -74,9 +74,25 @@ WHERE books.title = 'Божественная комедия' AND authors.name =
 
 -- 9. Добавить в базу книгу «Краткие ответы на большие вопросы», год издания 2020, автор «Стивен Хокинг», положить ее на полку в кабинете
 
- INSERT INTO authors (name)
-     VALUES('Стивен Хокинг')
-     ;
- INSERT INTO books (title, year, shelves_id)
-     VALUES('Краткие ответы на большинство вопросов', '2020', 1)
-;
+INSERT INTO authors 
+(name)
+VALUES 
+(
+	"Стивен Хокинг"
+);
+
+INSERT INTO books 
+(title, year, shelves_id)
+VALUES (
+	"Краткие ответы на большие вопросы", 
+    2020, 
+    (SELECT shelves.id FROM shelves WHERE shelves.title = "Полка в кабинете" LIMIT 1)
+);
+
+INSERT INTO authors_books
+(books_id, authors_id)
+VALUES 
+(
+	(SELECT books.id FROM books WHERE books.title = "Краткие ответы на большие вопросы" AND books.year = 2020 LIMIT 1),
+	(SELECT authors.id FROM authors WHERE authors.name = "Стивен Хокинг" LIMIT 1)
+);
